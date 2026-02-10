@@ -1,0 +1,358 @@
+body {
+    background-image: url("../src/bg1.jpg");
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Georgia", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #e75480;
+    margin-bottom: 0.5rem;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.envelope {
+    position: relative;
+    width: 35rem;
+    height: 24rem;
+    cursor: pointer;
+    perspective: 1000px;
+
+    animation:
+        riseUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        nudge 0.9s ease-in-out 1.8s infinite;
+}
+
+/* Back of envelope */
+.envelope-body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff8f8;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px #f1c6cf;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Top flap */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 14rem;
+    background: #f1b6c2;
+    border-radius: 0 0 180px 180px;
+    transform-origin: top;
+    transition: transform 0.9s ease;
+    z-index: 4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Left flap */
+.envelope-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 140px;
+    height: 100%;
+    background: #f6d0d9;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform-origin: left;
+    transition: transform 0.9s ease;
+    z-index: 3;
+}
+
+/* Right flap */
+.envelope-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 140px;
+    height: 100%;
+    background: #f6d0d9;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    transform-origin: right;
+    transition: transform 0.9s ease;
+    z-index: 3;
+}
+
+/* Bottom */
+.envelope-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 12rem;
+    background: #f1b6c2;
+    border-radius: 120px 120px 0 0;
+    transform-origin: bottom;
+    transition: transform 0.9s ease;
+    z-index: 2;
+}
+
+/* Letter */
+.letter {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    width: 95%;
+    height: 22rem;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: all 0.9s ease;
+    z-index: 3;
+    box-shadow: 0 15px 40px rgba(0.25, 0.25, 0.25, 0.25);
+}
+
+/* Image in top-right */
+.corner-stamp {
+    position: absolute;
+    top: -0.5rem;
+    right: -1rem;
+    height: 8rem;
+}
+
+.letter-content {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 0 2rem;
+}
+
+.heart1 {
+    width: 50%;
+}
+
+/* Push text away from image */
+.letter h2 {
+    margin: 0;
+    color: #e75480;
+    font-size: 2em;
+}
+
+.letter p {
+    margin-top: 12px;
+    color: #555;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+}
+
+#button button {
+    width: auto;
+    padding: 0.6rem 1.4rem;
+    border-radius: 1.2rem;
+}
+
+/* Open animation */
+.envelope.open {
+    animation: none;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 3;
+}
+
+.envelope.open .envelope-left {
+    transform: rotateY(-140deg);
+}
+
+.envelope.open .envelope-right {
+    transform: rotateY(140deg);
+}
+
+.envelope.open .envelope-bottom {
+    transform: rotateX(-180deg);
+}
+
+.envelope-left,
+.envelope-right {
+    transition-delay: 0.1s;
+}
+
+.envelope-bottom {
+    transition-delay: 0.2s;
+}
+
+.envelope-left,
+.envelope-right {
+    background: linear-gradient(to center,
+            #f6d0d9,
+            #f2bcc8);
+}
+
+.envelope.open .letter {
+    opacity: 1;
+    transform: scale(1.2);
+    transition-delay: 0.5s;
+}
+
+#button {
+    width: 50%;
+    margin: auto;
+    margin-top: 3.8rem;
+}
+
+button {
+    margin: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    background: #f1b6c2;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e75480;
+}
+
+/* Prompt overlay */
+#prompt-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Hide by default */
+.hidden {
+    display: none;
+}
+
+.prompt-box {
+    background: #fff8f8;
+    padding: 3rem;
+    border-radius: 18px;
+    border-top: solid 3rem #e75480;
+    text-align: center;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+    animation: pop 0.3s ease;
+}
+
+.prompt-box h2 {
+    color: #e75480;
+    margin-bottom: 2.25rem;
+    font-size: 1.8rem;
+}
+
+.prompt-buttons button {
+    margin: 0.75rem;
+    padding: 0.9rem 1.8rem;
+    width: 15rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #f1b6c2;
+    color: white;
+}
+
+.prompt-buttons button:hover {
+    background: #e75480;
+}
+
+#prompt-overlay {
+    display: none;
+}
+
+#prompt-overlay:not(.hidden) {
+    display: flex;
+}
+
+/* Little pop animation */
+@keyframes pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(120vh);
+        opacity: 0;
+    }
+
+    85% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes nudge {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-4px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    60% {
+        transform: translateX(-3px);
+    }
+
+    80% {
+        transform: translateX(3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Stamp positioning */
+.heart-stamp {
+    position: absolute;
+    bottom: -8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 15rem;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+.envelope.open .envelope-flap img {
+    opacity: 0;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I love you</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("src/bg1.jpg");
+            background-size: cover;
+            font-family: "Georgia", serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #e75480;
+            animation: fadeIn 2s ease;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Falling image style */
+        .falling {
+            position: fixed;
+            top: -60px;
+            width: 40px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Thank you, my love.<br>I love you sooooo big💜</h1>
+
+    <script>
+        function createFallingImage() {
+            const img = document.createElement("img");
+            img.src = "src/hearteu.png"; // ← replace this
+            img.className = "falling";
+
+            const size = Math.random() * 90 + 80;
+            img.style.width = size + "px";
+            img.style.left = Math.random() * 100 + "vw";
+
+            const duration = Math.random() * 3 + 4;
+            img.style.animationDuration = duration + "s";
+
+            document.body.appendChild(img);
+
+            setTimeout(() => {
+                img.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createFallingImage, 300);
+    </script>
+
+</body>
+</html>
+

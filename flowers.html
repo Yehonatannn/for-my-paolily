@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flowers for you</title>
+    <meta charset="UTF-8">
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background-image: url("src/bg1.jpg");
+        background-size: cover;
+        font-family: Georgia, serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        /* Helps sell the depth */
+        perspective: 1500px; /* +50% */
+    }
+
+    /* Title & image */
+    .intro {
+        text-align: center;
+        animation: handForward 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        transform-origin: center;
+    }
+
+    h1 {
+        color: #e75480;
+        margin-bottom: 1.5rem;
+        font-size: 3rem;
+    }
+
+    img {
+        max-width: 390px;
+        box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+        margin-bottom: 3rem;
+    }
+
+    /* Prompt popup */
+    .box {
+        background: #fff8f8;
+        border-radius: 21px;
+        width: 90%;
+        max-width: 510px;
+        box-shadow: 0 30px 75px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+        opacity: 0;
+        transform: scale(0.85);
+        animation: pop 0.35s ease forwards;
+        animation-delay: 1.5s;
+    }
+
+    .header {
+        background: #e75480;
+        color: white;
+        padding: 1.05rem 1.5rem;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .content {
+        padding: 2.25rem;
+        text-align: center;
+    }
+
+    p {
+        margin: 0 0 1.8rem;
+        color: #555;
+        font-size: 1.35rem;
+        line-height: 1.5;
+    }
+
+    button {
+        margin: 0.6rem;
+        padding: 1.05rem 2.4rem;
+        border: none;
+        border-radius: 30px;
+        background: #f1b6c2;
+        color: white;
+        font-size: 1.35rem;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover {
+        background: #e75480;
+        transform: scale(1.05);
+    }
+
+    /* ✋ Handing-forward animation */
+    @keyframes handForward {
+        0% {
+            opacity: 0;
+            transform: scale(0.6) translateZ(-300px);
+        }
+        70% {
+            opacity: 1;
+            transform: scale(1.08) translateZ(120px);
+        }
+        100% {
+            transform: scale(1) translateZ(0);
+        }
+    }
+
+    @keyframes pop {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+    <div class="intro">
+        <h1>These are for you 🌸</h1>
+        <img src="src/flowers.jpg" alt="flowers">
+    </div>
+
+    <div class="box">
+        <div class="header">💐 Message</div>
+        <div class="content">
+            <p>*hands you flowers*</p>
+            <div>
+                <button onclick="goNext()">accept</button>
+                <button onclick="goNext()">aw</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goNext() {
+            window.location.href = "letter.html";
+        }
+    </script>
+
+</body>
+</html>
